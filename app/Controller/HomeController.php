@@ -4,9 +4,14 @@
 
     class HomeController
     {
-        function index(): void 
+        function index(): void
         {
-            echo "HomeController.index()";
+            $model = [
+                'title' => 'Belajar PHP MVC',
+                'content' => 'Selamat belajar PHP MVC di Channel Programmer Zaman Now'
+            ];
+
+            require __DIR__ . '/../View/Home/index.php';
         }
 
         function hello(): void 
@@ -22,5 +27,17 @@
         function about(): void 
         {
             echo "Author, Eko Kurniawan Khannedy";
+        }
+
+        function login(): void
+        {
+            $request = [
+                'username' => $_POST['username'],
+                'password' => $_POST['password']
+            ];
+            
+            $response = [
+                "message" => 'Login sukses'
+            ];
         }
     }
