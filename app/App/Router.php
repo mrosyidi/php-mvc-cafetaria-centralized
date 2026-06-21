@@ -1,6 +1,6 @@
 <?php 
 
-    namespace Cafetaria;
+    namespace Cafetaria\App;
 
     class Router
     {
