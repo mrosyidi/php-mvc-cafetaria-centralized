@@ -6,13 +6,14 @@
     {
         private static array $routes = [];
 
-        public static function add(string $method, string $path, string $controller, string $function): void
+        public static function add(string $method, string $path, string $controller, string $function, array $middlewares = []): void
         {
             self::$routes[] = [
                 'method' => $method,
                 'path' => $path,
                 'controller' => $controller,
-                'function' => $function
+                'function' => $function,
+                'middleware' => $middlewares
             ];
         }
 
@@ -32,6 +33,13 @@
                 {
                     $controller = new $route['controller'];
                     $function = $route['function'];
+
+                    foreach($route['middleware'] as $middleware)
+                    {
+                        $instance = new $middleware;
+                        $instance->before();
+                    }
+
                     array_shift($variables);
                     call_user_func_array([$controller, $function], $variables);
                     return;
