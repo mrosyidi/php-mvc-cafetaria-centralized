@@ -1,10 +1,10 @@
 <?php 
 
-    $path = "/index";
+    require_once __DIR__ . '/../vendor/autoload.php';
+    
+    use Cafetaria\App\Router;
 
-    if(isset($_SERVER['PATH_INFO']))
-    {
-        $path =  $_SERVER['PATH_INFO'];
-    }
-
-    require_once __DIR__ . '/../app/View' . $path . '.php';
+    Router::add('GET', '/', 'HomeController', 'index');
+    Router::add('GET', '/login', 'UserController', 'login');
+    Router::add('GET', '/register', 'UserController', 'register');
+    Router::run();
